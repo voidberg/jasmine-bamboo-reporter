@@ -1,0 +1,38 @@
+{
+  "name": "jasmine-bamboo-reporter",
+  "version": "0.0.1",
+  "description": "A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser.",
+  "main": "index.js",
+  "keywords": [
+    "JSON",
+    "jasmine",
+    "protractor",
+    "reporter",
+    "tests",
+    "bamboo"
+  ],
+  "scripts": {
+    "eslint": "eslint *.js"
+  },
+  "author": {
+    "name": "Alexandru Badiu",
+    "email": "andu@ctrlz.ro",
+    "url": "http://alexandrubadiu.ro"
+  },
+  "homepage": "https://github.com/voidberg/jasmine-bamboo-reporter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voidberg/jasmine-bamboo-reporter"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voidberg/jasmine-bamboo-reporter/issues"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^1.5.1",
+    "eslint-config-airbnb": "^0.1.0"
+  }
+}
