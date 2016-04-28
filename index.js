@@ -1,5 +1,3 @@
-
-"use strict";
 var fs = require('fs');
 var lockFile = require('lockfile');
 
@@ -48,7 +46,7 @@ function Reporter(opts) {
   this.options = shallowMerge(defaultOpts, typeof opts === 'object' ? opts : {});
 
   this.spec = {};
-  this.specStart;
+  this.specStart = 0;
   this.output = {
     stats: {
       suites: 0,
@@ -68,15 +66,15 @@ function Reporter(opts) {
   };
 }
 
-Reporter.prototype.suiteDone = function() {
+Reporter.prototype.suiteDone = function suiteDone() {
   this.output.stats.suites++;
 };
 
-Reporter.prototype.specStarted = function() {
+Reporter.prototype.specStarted = function specStarted() {
   this.specStart = new global.Date();
 };
 
-Reporter.prototype.specDone = function(result) {
+Reporter.prototype.specDone = function specDone(result) {
   this.spec.duration = Math.floor((new global.Date().getTime() - this.specStart.getTime()) / 1000);
   this.spec.title = result.fullName;
   this.spec.fullTitle = result.description;
@@ -98,11 +96,11 @@ Reporter.prototype.specDone = function(result) {
   this.spec = {};
 };
 
-Reporter.prototype.jasmineStarted = function() {
+Reporter.prototype.jasmineStarted = function jasmineStarted() {
   this.output.stats.start = new global.Date();
 };
 
-Reporter.prototype.mergeOutput = function (previous) {
+Reporter.prototype.mergeOutput = function mergeOutput(previous) {
   this.output.stats.suites = this.output.stats.suites + previous.stats.suites;
   this.output.stats.tests = this.output.stats.tests + previous.stats.tests;
 
@@ -126,7 +124,7 @@ Reporter.prototype.mergeOutput = function (previous) {
 // Since that code is running in separate processes, it isn't easy to use a global/static class variable to
 // handle a single instance of the jasmine reporter - nor is it easy to aggregate the results. So the trick here
 // is to lock, read any file that exists, merge, write results to file, and then release lock.
-Reporter.prototype.jasmineDone = function() {
+Reporter.prototype.jasmineDone = function jasmineDone() {
   var self = this;
   var resultsOutput;
   var lockname = this.options.file + '.lock';
@@ -148,8 +146,6 @@ Reporter.prototype.jasmineDone = function() {
     if (fs.existsSync(self.options.file)) {
       raw = fs.readFileSync(self.options.file, {encoding: 'utf8'});
       previous = JSON.parse(raw);
-      debugger;
-
       self.mergeOutput(previous);
     }
     self.output.stats.duration = Math.floor((self.output.stats.end.getTime() - self.output.stats.start.getTime()) / 1000);
