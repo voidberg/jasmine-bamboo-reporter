@@ -30,9 +30,14 @@
   },
   "readmeFilename": "README.md",
   "dependencies": {
+    "fs": "0.0.2",
+    "lockfile": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^1.5.1",
-    "eslint-config-airbnb": "^0.1.0"
+    "eslint-config-airbnb": "^0.1.0",
+    "sleep": "^3.0.1",
+    "jasmine": "^2.4.1"
+
   }
 }
