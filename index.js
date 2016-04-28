@@ -106,7 +106,7 @@ Reporter.prototype.mergeOutput = function (previous) {
   this.output.stats.suites = this.output.stats.suites + previous.stats.suites;
   this.output.stats.tests = this.output.stats.tests + previous.stats.tests;
 
-  this.output.stats.passing = this.output.stats.passing + previous.stats.passing;
+  this.output.stats.passes = this.output.stats.passes + previous.stats.passes;
   this.output.stats.pending = this.output.stats.pending + previous.stats.pending;
   this.output.stats.failures = this.output.stats.failures + previous.stats.failures;
 
