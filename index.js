@@ -59,6 +59,7 @@ function Reporter(opts) {
       start: 0, // this is the overall time for everything. - all suites.
       end: 0,
       duration: 0,
+      time: 0, // bamboo + mocha seem to be using "time", not duration.
     },
     failures: [],
     passes: [],
@@ -76,6 +77,7 @@ Reporter.prototype.specStarted = function specStarted() {
 
 Reporter.prototype.specDone = function specDone(result) {
   this.spec.duration = Math.floor((new global.Date().getTime() - this.specStart.getTime()) / 1000);
+  this.spec.time = this.spec.duration;
   this.spec.title = result.fullName;
   this.spec.fullTitle = result.description;
 
@@ -149,6 +151,7 @@ Reporter.prototype.jasmineDone = function jasmineDone() {
       self.mergeOutput(previous);
     }
     self.output.stats.duration = Math.floor((self.output.stats.end.getTime() - self.output.stats.start.getTime()) / 1000);
+    self.output.stats.time = self.output.stats.duration;
     resultsOutput = self.options.beautify ? JSON.stringify(self.output, null, self.options.indentationLevel) : JSON.stringify(self.output);
     fs.writeFileSync(self.options.file, resultsOutput);
     lockFile.unlock(lockname, function postUnlock(erUnlock) {

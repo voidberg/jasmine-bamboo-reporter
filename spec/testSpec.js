@@ -21,6 +21,7 @@ function checkStruct(json) {
     'start': false,
     'end': false,
     'duration': false,
+    'time': false
   }
 
   Object.keys(json).forEach(function (key) {
@@ -37,6 +38,7 @@ function checkStruct(json) {
       expected_stats[key] = true;
     }
   });
+  expect(json.stats.duration).toBe(json.stats.time, "Want time == duration");
 
   Object.keys(expected).forEach(function (key) {
     expect(expected[key]).toBeTruthy("Should see key " + key);
@@ -44,6 +46,7 @@ function checkStruct(json) {
   Object.keys(expected_stats).forEach(function (key) {
     expect(expected_stats[key]).toBeTruthy("Should see key stats." + key);
   });
+
 
 }
 
