@@ -1,6 +1,6 @@
 {
   "name": "jasmine-bamboo-reporter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser.",
   "main": "index.js",
   "keywords": [
@@ -38,6 +38,5 @@
     "eslint-config-airbnb": "^0.1.0",
     "sleep": "^3.0.1",
     "jasmine": "^2.4.1"
-
   }
 }
