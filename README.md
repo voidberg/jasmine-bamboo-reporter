@@ -1,14 +1,14 @@
 # jasmine-bamboo-reporter
-[![view on npm](http://img.shields.io/npm/v/jasmine-bamboo-reporter.svg?style=flat)](https://www.npmjs.org/package/jasmine-bamboo-reporter)
-[![npm module downloads per month](http://img.shields.io/npm/dm/jasmine-bamboo-reporter.svg?style=flat)](https://www.npmjs.org/package/jasmine-bamboo-reporter)
-[![Dependency status](https://david-dm.org/voidberg/jasmine-bamboo-reporter.svg?style=flat)](https://david-dm.org/voidberg/jasmine-bamboo-reporter)
+[![npm version](https://img.shields.io/npm/v/jasmine-bamboo-reporter.svg?style=flat)](https://www.npmjs.com/package/jasmine-bamboo-reporter)
+[![npm downloads per month](https://img.shields.io/npm/dm/jasmine-bamboo-reporter.svg?style=flat)](https://www.npmjs.com/package/jasmine-bamboo-reporter)
+[![CI](https://github.com/voidberg/jasmine-bamboo-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/voidberg/jasmine-bamboo-reporter/actions/workflows/ci.yml)
 
-> A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser. It supports 'test sharding' or multiple instances of Jasmine running via Protractor. This support is handled by locking the results file and then merging with any previous results.
+> A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser. It supports test sharding and other setups that run Jasmine across multiple processes, locking the results file and merging with any previous results.
 
 ## Installation
 
 ```sh
-npm install jasmine-bamboo-reporter
+npm install --save-dev jasmine-bamboo-reporter
 ```
 
 ## Usage
@@ -28,35 +28,61 @@ if (fs.existsSync("jasmine-results.json")) fs.unlinkSync("jasmine-results.json")
 
 ```
 
-### Protractor/Jasmine Usage
+### Parallel and sharded runs
+
+When several Jasmine processes write to the same results file, the reporter locks the file and merges each run into it, so a sharded run still ends with a single combined report. This works with any setup that runs Jasmine across multiple processes, whether that is CI shards, a parallel runner such as WebdriverIO, or your own launcher.
+
+Add the reporter in each process as shown above, and clear any stale results and lock file once before the run starts, not inside each process:
+
 ```javascript
-// in Protractor conf
-var JSONReporter = require('jasmine-bamboo-reporter');
 var fs = require('fs');
 
-exports.config = {
+if (fs.existsSync('jasmine-results.json.lock')) fs.unlinkSync('jasmine-results.json.lock');
+if (fs.existsSync('jasmine-results.json')) fs.unlinkSync('jasmine-results.json');
+```
 
-framework: 'jasmine2',
+## Example output
 
-...
+A run with one passing spec, one failing spec, and one skipped spec writes:
 
-beforeLaunch: function () {
-    //clean up any residual/leftover from a previous run. Ensure we have clean
-    //files for both locking and merging.
-    if (fs.existsSync('jasmine-results.json.lock')) {
-      fs.unlinkSync('jasmine-results.json.lock');
+```json
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 5,
+    "pending": 2,
+    "failures": 1,
+    "start": "2026-06-25T12:00:00.000Z",
+    "end": "2026-06-25T12:00:09.000Z",
+    "duration": 9,
+    "time": 9
+  },
+  "failures": [
+    {
+      "duration": 2,
+      "time": 2,
+      "title": "singleton suite 1 should fail",
+      "fullTitle": "should fail",
+      "error": "1 Failure: 1. : Expected false to be truthy 'false should not be true. This will fail'."
     }
-    if (fs.existsSync('jasmine-results.json')) {
-      fs.unlink('jasmine-results.json');
+  ],
+  "passes": [
+    {
+      "duration": 1,
+      "time": 1,
+      "title": "singleton suite 1 should pass",
+      "fullTitle": "should pass"
     }
-},
-  
-onPrepare: function() {
-	jasmine.getEnv().addReporter(new JSONReporter({
-		file: 'jasmine-results.json', // by default it writes to jasmine.json
-		beautify: true,
-		indentationLevel: 4 // used if beautify === true
-	}));
+  ],
+  "skipped": [
+    {
+      "duration": 0,
+      "time": 0,
+      "title": "singleton suite 1 should defer",
+      "fullTitle": "should defer"
+    }
+  ]
 }
 ```
 
