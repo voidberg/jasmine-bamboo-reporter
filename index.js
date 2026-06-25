@@ -1,11 +1,11 @@
-var fs = require('fs');
-var lockFile = require('lockfile');
+const fs = require('fs');
+const lockFile = require('lockfile');
 
 
 function format(result) {
-  var formatted = '';
-  var msg = [];
-  var counter = 1;
+  const msg = [];
+  let counter = 1;
+  let formatted;
 
   if (result.failedExpectations.length === 1) {
     formatted = '1 Failure: ';
@@ -24,7 +24,7 @@ function format(result) {
 }
 
 function shallowMerge(obj1, obj2) {
-  var mergedObj = {};
+  const mergedObj = {};
 
   Object.keys(obj1).forEach(function iterator(key) {
     if (!obj2[key]) {
@@ -38,7 +38,7 @@ function shallowMerge(obj1, obj2) {
 }
 
 function Reporter(opts) {
-  var defaultOpts = {
+  const defaultOpts = {
     file: 'jasmine.json',
     beautify: true,
     indentationLevel: 4,
@@ -72,11 +72,11 @@ Reporter.prototype.suiteDone = function suiteDone() {
 };
 
 Reporter.prototype.specStarted = function specStarted() {
-  this.specStart = new global.Date();
+  this.specStart = new Date();
 };
 
 Reporter.prototype.specDone = function specDone(result) {
-  this.spec.duration = Math.floor((new global.Date().getTime() - this.specStart.getTime()) / 1000);
+  this.spec.duration = Math.floor((new Date().getTime() - this.specStart.getTime()) / 1000);
   this.spec.time = this.spec.duration;
   this.spec.title = result.fullName;
   this.spec.fullTitle = result.description;
@@ -99,7 +99,7 @@ Reporter.prototype.specDone = function specDone(result) {
 };
 
 Reporter.prototype.jasmineStarted = function jasmineStarted() {
-  this.output.stats.start = new global.Date();
+  this.output.stats.start = new Date();
 };
 
 Reporter.prototype.mergeOutput = function mergeOutput(previous) {
@@ -127,20 +127,18 @@ Reporter.prototype.mergeOutput = function mergeOutput(previous) {
 // handle a single instance of the jasmine reporter - nor is it easy to aggregate the results. So the trick here
 // is to lock, read any file that exists, merge, write results to file, and then release lock.
 Reporter.prototype.jasmineDone = function jasmineDone() {
-  var self = this;
-  var resultsOutput;
-  var lockname = this.options.file + '.lock';
-  var previous;
-  var raw;
+  const self = this;
+  const lockname = this.options.file + '.lock';
+  let resultsOutput;
+  let previous;
+  let raw;
 
-  self.output.stats.end = new global.Date();
+  self.output.stats.end = new Date();
 
 
   lockFile.lock(lockname, {wait: 2000}, function postLock(er) {
     if (er) {
-      /* eslint-disable no-console */
       console.error('Jasmine bamboo reporter unable to acquire a file lock for ' + lockname);
-      /* eslint-enable no-console */
       return;
     }
     // we can ensure that no other process will update the results causing a write-afte-read hazard.
@@ -156,9 +154,7 @@ Reporter.prototype.jasmineDone = function jasmineDone() {
     fs.writeFileSync(self.options.file, resultsOutput);
     lockFile.unlock(lockname, function postUnlock(erUnlock) {
       if (erUnlock) {
-        /* eslint-disable no-console */
         console.error('Jasmine bamboo reporter could not unlock file ' + lockname);
-        /* eslint-enable no-console */
       }
     });
   });
