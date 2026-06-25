@@ -88,4 +88,4 @@ A run with one passing spec, one failing spec, and one skipped spec writes:
 
 ## License
 
-[MIT](https://github.com/voidberg/jasmine-bamboo-reporter/blob/master/LICENSE)
+[MIT](https://github.com/voidberg/jasmine-bamboo-reporter/blob/main/LICENSE)
