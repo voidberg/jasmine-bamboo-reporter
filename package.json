@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser.",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "JSON",
     "jasmine",
@@ -12,7 +15,8 @@
     "bamboo"
   ],
   "scripts": {
-    "eslint": "eslint *.js"
+    "eslint": "eslint *.js",
+    "test": "jasmine"
   },
   "author": {
     "name": "Alexandru Badiu",
@@ -30,13 +34,12 @@
   },
   "readmeFilename": "README.md",
   "dependencies": {
-    "fs": "0.0.2",
-    "lockfile": "^1.0.1"
+    "lockfile": "^1.0.4"
   },
   "devDependencies": {
-    "eslint": "^1.5.1",
-    "eslint-config-airbnb": "^0.1.0",
-    "sleep": "^3.0.1",
-    "jasmine": "^2.4.1"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.5.0",
+    "globals": "^17.7.0",
+    "jasmine": "^6.3.0"
   }
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 // This runs a jasmine test with a custom reporter (the one we're trying to test)
 var Jasmine = require('jasmine');
@@ -12,5 +12,7 @@ var reporter = new JSONReporter({
 });
 
 jasmine.addReporter(reporter);
+jasmine.exitOnCompletion = false;
+jasmine.randomizeTests(false);
 console.log("Running test " + process.argv[2]);
 jasmine.execute([process.argv[2]]);
