@@ -29,3 +29,7 @@ node_modules
 # test results
 results.json
 
+# build output
+dist
+*.tsbuildinfo
+

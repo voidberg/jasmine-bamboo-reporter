@@ -1,0 +1,24 @@
+{
+    "stats": {
+        "suites": 1,
+        "tests": 1,
+        "passes": 0,
+        "pending": 0,
+        "failures": 1,
+        "start": "2026-01-01T12:00:00.000Z",
+        "end": "2026-01-01T12:00:12.000Z",
+        "duration": 12,
+        "time": 12
+    },
+    "failures": [
+        {
+            "duration": 2,
+            "time": 2,
+            "title": "suite x boom",
+            "fullTitle": "boom",
+            "error": "1 Failure: 1. : Expected false to be truthy."
+        }
+    ],
+    "passes": [],
+    "skipped": []
+}

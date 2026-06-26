@@ -1,0 +1,44 @@
+{
+    "stats": {
+        "suites": 3,
+        "tests": 4,
+        "passes": 2,
+        "pending": 1,
+        "failures": 1,
+        "start": "2026-01-01T12:01:40.000Z",
+        "end": "2026-01-01T12:02:10.000Z",
+        "duration": 30,
+        "time": 30
+    },
+    "failures": [
+        {
+            "duration": 3,
+            "time": 3,
+            "title": "A fail",
+            "fullTitle": "fail",
+            "error": "1 Failure: 1. : nope"
+        }
+    ],
+    "passes": [
+        {
+            "duration": 1,
+            "time": 1,
+            "title": "B pass",
+            "fullTitle": "pass"
+        },
+        {
+            "duration": 2,
+            "time": 2,
+            "title": "A pass",
+            "fullTitle": "pass"
+        }
+    ],
+    "skipped": [
+        {
+            "duration": 0,
+            "time": 0,
+            "title": "B pend",
+            "fullTitle": "pend"
+        }
+    ]
+}

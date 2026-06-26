@@ -1,0 +1,23 @@
+{
+    "stats": {
+        "suites": 1,
+        "tests": 1,
+        "passes": 1,
+        "pending": 0,
+        "failures": 0,
+        "start": "2026-01-01T12:00:00.000Z",
+        "end": "2026-01-01T12:00:50.000Z",
+        "duration": 50,
+        "time": 50
+    },
+    "failures": [],
+    "passes": [
+        {
+            "duration": 1,
+            "time": 1,
+            "title": "suite c quick",
+            "fullTitle": "quick"
+        }
+    ],
+    "skipped": []
+}

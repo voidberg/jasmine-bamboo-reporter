@@ -1,0 +1,44 @@
+{
+    "stats": {
+        "suites": 2,
+        "tests": 4,
+        "passes": 2,
+        "pending": 1,
+        "failures": 1,
+        "start": "2026-01-01T12:00:00.000Z",
+        "end": "2026-01-01T12:00:50.000Z",
+        "duration": 50,
+        "time": 50
+    },
+    "failures": [
+        {
+            "duration": 2,
+            "time": 2,
+            "title": "suite a should fail",
+            "fullTitle": "should fail",
+            "error": "2 Failures: 1. : Expected 1 to be 2.\n2. : Expected true to be false."
+        }
+    ],
+    "passes": [
+        {
+            "duration": 1,
+            "time": 1,
+            "title": "suite a should pass",
+            "fullTitle": "should pass"
+        },
+        {
+            "duration": 3,
+            "time": 3,
+            "title": "suite b should pass slow",
+            "fullTitle": "should pass slow"
+        }
+    ],
+    "skipped": [
+        {
+            "duration": 0,
+            "time": 0,
+            "title": "suite a should pend",
+            "fullTitle": "should pend"
+        }
+    ]
+}
