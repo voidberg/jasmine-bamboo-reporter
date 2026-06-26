@@ -37,7 +37,7 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node scripts/fix-cjs-dts.mjs",
     "clean": "rm -rf dist",
     "test": "vitest run",
     "test:watch": "vitest",
