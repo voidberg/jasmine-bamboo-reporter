@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/voidberg/jasmine-bamboo-reporter/compare/jasmine-bamboo-reporter-v0.2.0...jasmine-bamboo-reporter-v0.2.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* emit export= CJS types for the default export ([1c4d092](https://github.com/voidberg/jasmine-bamboo-reporter/commit/1c4d0920ca30e770945bb7b0e9710f1b3af34016))
+
 ## [0.2.0](https://github.com/voidberg/jasmine-bamboo-reporter/compare/jasmine-bamboo-reporter-v0.1.0...jasmine-bamboo-reporter-v0.2.0) (2026-06-26)
 
 
