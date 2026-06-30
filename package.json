@@ -1,7 +1,7 @@
 {
   "name": "jasmine-bamboo-reporter",
   "version": "0.2.1",
-  "description": "A reporter for Jasmine which produces a report compatible with Atlassian Bamboo Mocha Test Parser.",
+  "description": "Jasmine reporter that writes a JSON report compatible with Atlassian Bamboo's Mocha Test Parser. Supports sharded runs. TypeScript, dual ESM/CJS.",
   "keywords": [
     "JSON",
     "jasmine",
